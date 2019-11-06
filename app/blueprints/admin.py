@@ -29,8 +29,8 @@ def index():
 
 
 @admin_bp.route('/profile/<int:user_id>', methods=["POST", "GET"])
-@admin_required
 @login_required
+@admin_required
 def edit_profile_admin(user_id):
     user = User.query.get_or_404(user_id)
     form = EditProfileAdminForm(user=user)
@@ -48,7 +48,7 @@ def edit_profile_admin(user_id):
         user.confirmed = form.confirmed.data
         user.active = form.active.data
         db.session.commit()
-        flash("Profile edited", 'success')
+        flash('Profile edited', 'success')
         return redirect_back()
     form.name.data = user.name
     form.role.data = user.role_id

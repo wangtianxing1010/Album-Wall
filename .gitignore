@@ -116,3 +116,7 @@ venv
  !uploads/avatars/.gitkeep
 
  whooshee
+
+PIpfile
+Pipfile.lock
+.DS_Store

@@ -19,18 +19,18 @@ class BaseTestCase(unittest.TestCase):
         db.create_all()
         Role.init_role()
 
-        admin_user = User(email="admin@test.com", name="Admin", username='admin', confirmed=True)
+        admin_user = User(email="admin@test.com", name="Admin User", username='admin', confirmed=True)
         admin_user.set_password('123456')
         admin_user.set_role(2)
         common_user = User(email="common@test.com", name="Common User", username='common', confirmed=True)
         common_user.set_password('123456')
         unconfirmed_user = User(email="unconfirmed@test.com", name="Unconfirmed", username='unconfirmed', confirmed=False)
         unconfirmed_user.set_password('123456')
-        locked_user = User(email="locked@test.com", name="Locked", username='locked', confirmed=True,
+        locked_user = User(email="locked@test.com", name="Locked User", username='locked', confirmed=True,
                            locked=True)
         locked_user.set_password('123456')
         locked_user.lock()
-        blocked_user = User(email="blocked@test.com", name="Blocked", username='blocked', confirmed=True,
+        blocked_user = User(email="blocked@test.com", name="Blocked User", username='blocked', confirmed=True,
                             active=False)
         blocked_user.set_password('123456')
 
@@ -61,7 +61,7 @@ class BaseTestCase(unittest.TestCase):
         ), follow_redirects=True)
 
     def logout(self):
-        return self.client.post(url_for('auth.logout'), follow_redirects=True)
+        return self.client.get(url_for('auth.logout'), follow_redirects=True)
 
 
 

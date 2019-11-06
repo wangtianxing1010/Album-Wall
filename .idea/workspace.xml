@@ -1,7 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5c3ddc5c-2cdf-4f89-8121-8e4257f88a2d" name="Default" comment="" />
+    <list default="true" id="5c3ddc5c-2cdf-4f89-8121-8e4257f88a2d" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/blueprints/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/blueprints/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/new.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/new.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data-dev.db" beforeDir="false" afterPath="$PROJECT_DIR$/data-dev.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/base.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/base.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/admin_l.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/admin_l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/admin_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/admin_m.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/admin_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/admin_s.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/blocked_l.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/blocked_l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/blocked_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/blocked_m.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/blocked_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/blocked_s.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/common_l.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/common_l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/common_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/common_m.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/common_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/common_s.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/locked_l.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/locked_l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/locked_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/locked_m.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/locked_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/locked_s.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/unconfirmed_l.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/unconfirmed_l.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/unconfirmed_m.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/unconfirmed_m.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/avatars/unconfirmed_s.png" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/avatars/unconfirmed_s.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/MAIN_58kovxx5weps1mp0.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/MAIN_7q94sxedhy77ma3u.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/MAIN_8so0s6t6z2hgiic1.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/MAIN_gfj6a3tpjzkcpwca.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/MAIN_rxmaxmtxalgybpa5.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/photo/_MAIN_848.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/MAIN_a0t6vfpuhfp1v4gq.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/MAIN_j6g79timk43pzhxn.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/MAIN_rtgp8uic8gsdgruf.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/MAIN_yxmfxzq1p6enveg0.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/MAIN_zv0dmtp6kwva789i.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/tag/_MAIN_348.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_2geuzidefy9i18v1.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_h60g28kj0c409uv2.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_ihu7cr81upfal6a1.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_lfs6l0u1zr99obhl.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_osdxqdi7hrpus2gz.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/MAIN_xxea8fjmrztjnves.seg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/whooshee/user/_MAIN_1469.toc" beforeDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,8 +54,9 @@
     <session id="62429822">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="13" />
+          <entry key="project.closed" value="14" />
           <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.10" value="1" />
           <entry key="project.open.time.12" value="1" />
           <entry key="project.open.time.13" value="1" />
           <entry key="project.open.time.14" value="1" />
@@ -25,7 +68,7 @@
           <entry key="project.open.time.7" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="1" />
-          <entry key="project.opened" value="15" />
+          <entry key="project.opened" value="16" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -38,29 +81,30 @@
           <entry key="css" value="2" />
           <entry key="flaskenv" value="5" />
           <entry key="gitignore" value="3" />
-          <entry key="html" value="73" />
+          <entry key="html" value="75" />
           <entry key="js" value="3" />
           <entry key="lock" value="1" />
-          <entry key="py" value="156" />
+          <entry key="py" value="157" />
           <entry key="txt" value="4" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="CSS" value="2" />
-          <entry key="HTML" value="73" />
+          <entry key="HTML" value="75" />
           <entry key="JavaScript" value="3" />
           <entry key="PLAIN_TEXT" value="20" />
-          <entry key="Python" value="156" />
+          <entry key="Python" value="157" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="1" />
           <entry key="flaskenv" value="41" />
+          <entry key="gitignore" value="12" />
           <entry key="html" value="7377" />
           <entry key="js" value="2" />
-          <entry key="py" value="53422" />
+          <entry key="py" value="53523" />
           <entry key="txt" value="221" />
         </counts>
       </usages-collector>
@@ -68,8 +112,8 @@
         <counts>
           <entry key="HTML" value="7377" />
           <entry key="JavaScript" value="2" />
-          <entry key="PLAIN_TEXT" value="247" />
-          <entry key="Python" value="53438" />
+          <entry key="PLAIN_TEXT" value="259" />
+          <entry key="Python" value="53539" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.vcs.git.usages" />
@@ -78,31 +122,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/base.py">
+        <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="332">
-              <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-                <marker date="1573001148582" expanded="true" signature="196:197" ph="..." />
-                <marker date="1573001148582" expanded="true" signature="196:202" ph="..." />
-              </folding>
+            <state relative-caret-position="576">
+              <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/.gitignore">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1458" />
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/forms/user.py">
+        <entry file="file://$PROJECT_DIR$/tests/base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-562">
-              <caret line="3" column="85" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="85" />
+            <state relative-caret-position="394">
+              <caret line="32" column="72" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <marker date="1573056830416" expanded="true" signature="196:197" ph="..." />
+                <marker date="1573056830416" expanded="true" signature="196:202" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -110,12 +147,42 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/test_admin.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="184">
-              <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
+            <state relative-caret-position="457">
+              <caret line="135" column="28" selection-start-line="135" selection-start-column="23" selection-end-line="135" selection-end-column="28" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1572999763424" expanded="true" signature="168:337" ph="..." />
+                <marker date="1573056889780" expanded="true" signature="168:337" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/blueprints/admin.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="217">
+              <caret line="131" column="36" lean-forward="true" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#73#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="307">
+              <caret line="96" column="20" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/admin/edit_profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="324">
+              <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -124,32 +191,9 @@
         <entry file="file://$PROJECT_DIR$/app/templates/new.html">
           <provider selected="true" editor-type-id="text-editor">
             <state>
-              <caret column="6502" selection-start-column="6502" selection-end-column="6502" />
+              <caret column="9878" selection-start-column="9878" selection-end-column="9878" />
               <folding>
-                <element signature="e#2527#2533#0" expanded="true" />
-                <element signature="e#2533#2539#0" expanded="true" />
-                <element signature="e#4689#4695#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/admin/index.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="18" column="69" selection-start-line="18" selection-start-column="69" selection-end-line="18" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/forms/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="19" selection-start-line="19" selection-end-line="19" />
-              <folding>
-                <element signature="e#0#71#0" expanded="true" />
+                <element signature="e#8150#8156#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -167,8 +211,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+            <state relative-caret-position="311">
+              <caret line="35" column="22" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="22" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
                 <marker date="1573001134083" expanded="true" signature="7658:7691" ph="..." />
@@ -180,7 +224,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/blueprints/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="302">
+            <state relative-caret-position="54">
               <caret line="17" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -203,7 +247,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>abort</find>
       <find>foreign_key</find>
       <find>edit</find>
       <find>default</find>
@@ -233,6 +276,7 @@
       <find>read_notifi</find>
       <find>role</find>
       <find>validator</find>
+      <find>flash</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -241,8 +285,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/templates/emails/confirm.txt" />
-        <option value="$PROJECT_DIR$/app/templates/emails/reset_password.html" />
         <option value="$PROJECT_DIR$/app/templates/emails/reset_password.txt" />
         <option value="$PROJECT_DIR$/app/decorators.py" />
         <option value="$PROJECT_DIR$/app/utils.py" />
@@ -284,18 +326,20 @@
         <option value="$PROJECT_DIR$/app/templates/base.html" />
         <option value="$PROJECT_DIR$/app/templates/user/_header.html" />
         <option value="$PROJECT_DIR$/app/forms/user.py" />
-        <option value="$PROJECT_DIR$/app/blueprints/admin.py" />
-        <option value="$PROJECT_DIR$/tests/test_admin.py" />
         <option value="$PROJECT_DIR$/app/forms/admin.py" />
         <option value="$PROJECT_DIR$/app/templates/admin/index.html" />
         <option value="$PROJECT_DIR$/app/new.html" />
         <option value="$PROJECT_DIR$/app/blueprints/main.py" />
         <option value="$PROJECT_DIR$/app/models.py" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/app/templates/new.html" />
+        <option value="$PROJECT_DIR$/app/blueprints/admin.py" />
         <option value="$PROJECT_DIR$/tests/base.py" />
+        <option value="$PROJECT_DIR$/tests/test_admin.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6" fullScreen="true">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1280" />
     <option name="height" value="777" />
@@ -494,9 +538,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="882">
           <caret line="58" column="53" selection-start-line="58" selection-start-column="53" selection-end-line="58" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -630,13 +671,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/admin/edit_profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="19" column="10" selection-start-line="19" selection-start-column="10" selection-end-line="19" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/forms/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -654,20 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/blueprints/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
-          <caret line="44" column="16" selection-start-line="44" selection-start-column="16" selection-end-line="44" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/admin/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -675,32 +695,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/new.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="6502" selection-start-column="6502" selection-end-column="6502" />
-          <folding>
-            <element signature="e#2527#2533#0" expanded="true" />
-            <element signature="e#2533#2539#0" expanded="true" />
-            <element signature="e#4689#4695#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/forms/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
+        <state relative-caret-position="252">
           <caret line="19" selection-start-line="19" selection-end-line="19" />
           <folding>
             <element signature="e#0#71#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/forms/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-562">
-          <caret line="3" column="85" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="85" />
         </state>
       </provider>
     </entry>
@@ -713,7 +714,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/blueprints/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
+        <state relative-caret-position="54">
           <caret line="17" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -723,10 +724,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/forms/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-341">
+          <caret line="3" column="85" selection-start-line="3" selection-start-column="80" selection-end-line="3" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="576">
+          <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/new.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="9878" selection-start-column="9878" selection-end-column="9878" />
+          <folding>
+            <element signature="e#8150#8156#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/admin/edit_profile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="18" column="13" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="96" column="20" selection-start-line="96" selection-start-column="20" selection-end-line="96" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_admin.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="457">
+          <caret line="135" column="28" selection-start-line="135" selection-start-column="23" selection-end-line="135" selection-end-column="28" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1573056889780" expanded="true" signature="168:337" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="123" column="8" selection-start-line="123" selection-start-column="8" selection-end-line="123" selection-end-column="8" />
+        <state relative-caret-position="311">
+          <caret line="35" column="22" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="22" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
             <marker date="1573001134083" expanded="true" signature="7658:7691" ph="..." />
@@ -734,32 +784,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="184">
-          <caret line="17" column="29" selection-start-line="17" selection-start-column="29" selection-end-line="17" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1572999763424" expanded="true" signature="168:337" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/base.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="332">
-          <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
+        <state relative-caret-position="394">
+          <caret line="32" column="72" selection-start-line="32" selection-start-column="72" selection-end-line="32" selection-end-column="72" />
           <folding>
             <element signature="e#0#15#0" expanded="true" />
-            <marker date="1573001148582" expanded="true" signature="196:197" ph="..." />
-            <marker date="1573001148582" expanded="true" signature="196:202" ph="..." />
+            <marker date="1573056830416" expanded="true" signature="196:197" ph="..." />
+            <marker date="1573056830416" expanded="true" signature="196:202" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
+    <entry file="file://$PROJECT_DIR$/app/blueprints/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1458" />
+        <state relative-caret-position="217">
+          <caret line="131" column="36" lean-forward="true" selection-start-line="131" selection-start-column="36" selection-end-line="131" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#73#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

@@ -24,7 +24,7 @@ class AdminTestCase(BaseTestCase):
         self.assertIn('Please log in to access this page', data)
         self.assertNotIn('Admin Dashboard', data)
 
-        self.login()
+        self.login() # login as common user
         response = self.client.get(url_for('admin.index'))
         data = response.get_data(as_text=True)
         self.assertEqual(response.status_code, 403) # Forbidden, Permission required
@@ -34,7 +34,7 @@ class AdminTestCase(BaseTestCase):
         role_id = Role.query.filter_by(name='Locked').first().id
         response = self.client.post(url_for('admin.edit_profile_admin', user_id=2), data=dict(
             username="newname",
-            role_id=role_id,
+            role=role_id,
             confirmed=True,
             active=True,
             name="New Name",
@@ -44,10 +44,10 @@ class AdminTestCase(BaseTestCase):
         self.assertIn("Profile edited", data)
 
         user = User.query.get(2)
-        self.assertEqual(user.username, "newname")
-        self.assertEqual(user.role.name, 'Locked')
         self.assertEqual(user.name, "New Name")
+        self.assertEqual(user.username, "newname")
         self.assertEqual(user.email, 'new@test.com')
+        self.assertEqual(user.role.name, 'Locked')
 
     def test_block_user(self):
         response = self.client.post(url_for('admin.block_user', user_id=2),
@@ -104,39 +104,39 @@ class AdminTestCase(BaseTestCase):
         response = self.client.get(url_for('admin.manage_user'))
         data = response.get_data(as_text=True)
         self.assertIn("Manage Users", data)
-        self.assertIn("Admin", data)
+        self.assertIn("Admin User", data)
         self.assertIn("Common User", data)
-        self.assertIn("Locked", data)
+        self.assertIn("Locked User", data)
 
         response = self.client.get(url_for('admin.manage_user', filter='locked'))
         data = response.get_data(as_text=True)
         self.assertIn("Manage Users", data)
-        self.assertIn("Locked", data)
-        self.assertNotIn("Common", data)
+        self.assertIn("Locked User", data)
+        self.assertNotIn("Common User", data)
 
         response = self.client.get(url_for('admin.manage_user', filter='blocked'))
         data = response.get_data(as_text=True)
         self.assertIn("Manage Users", data)
-        self.assertIn("Blocked", data)
-        self.assertNotIn("Locked", data)
-        self.assertNotIn("Admin", data)
-        self.assertNotIn("Common", data)
+        self.assertIn("Blocked User", data)
+        self.assertNotIn("Locked User", data)
+        self.assertNotIn("Admin User", data)
+        self.assertNotIn("Common User", data)
 
         response = self.client.get(url_for('admin.manage_user', filter='administrator'))
         data = response.get_data(as_text=True)
         self.assertIn("Manage Users", data)
-        self.assertIn("Admin", data)
-        self.assertNotIn("Locked", data)
-        self.assertNotIn("Blocked", data)
-        self.assertNotIn("Common", data)
+        self.assertIn("Admin User", data)
+        self.assertNotIn("Locked User", data)
+        self.assertNotIn("Blocked User", data)
+        self.assertNotIn("Common User", data)
 
         response = self.client.get(url_for('admin.manage_user', filter='moderator'))
         data = response.get_data(as_text=True)
         self.assertIn("Manage Users", data)
-        self.assertIn("Admin", data)
-        self.assertNotIn("Locked", data)
-        self.assertNotIn("Blocked", data)
-        self.assertNotIn("Common", data)
+        self.assertNotIn("Admin User", data)
+        self.assertNotIn("Locked User", data)
+        self.assertNotIn("Blocked User", data)
+        self.assertNotIn("Common User", data)
 
     def test_manage_photo_page(self):
         response = self.client.get(url_for('admin.manage_photo'))
