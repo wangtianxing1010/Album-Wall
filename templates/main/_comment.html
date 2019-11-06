@@ -1,0 +1,51 @@
+<div>
+    <h3>{{ photo.comments|length }} Comments
+        <small>
+            <a>lateset</a>
+        </small>
+        {% if current_user == photo.author %}
+        <a>
+            Disable and Enable
+        </a>
+        {% endif %}
+    </h3>
+    <hr>
+    {% if comments %}
+        {% for comment in comments %}
+            <div>
+                <div>
+                    <a>
+                        <img src="">
+                    </a>
+                </div>
+                <div class="comment-body">
+                    <h6>
+                        <a>
+
+                        </a>
+                        <small>
+
+                        </small>
+                        {% if current_user.is_authenticated %}
+                        {% endif %}
+
+                    </h6>
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+        <div>
+            {{ render_pagination(pagination) }}
+        </div>
+    {% else %}
+    <p class="tip">
+        No Comments.
+    </p>
+    {% endif %}
+
+    {% if photo.comment_allowed %}
+    {% endif %}
+</div>

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block tilte %} Home {% endblock %}
+
+{% block content %}
+    <div>
+        <div>
+            <img src="{{ url_for('static', filename='images/index.jpg') }}" >
+        </div>
+        <div>
+            <h1>Album wall</h1>
+            <p>This album wall can be integrated into projects</p>
+        </div>
+    </div>
+{% endblock %}
