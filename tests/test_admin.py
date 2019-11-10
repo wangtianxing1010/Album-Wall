@@ -33,7 +33,7 @@ class AdminTestCase(BaseTestCase):
     def test_edit_profile_admin(self):
         role_id = Role.query.filter_by(name='Locked').first().id
         response = self.client.post(url_for('admin.edit_profile_admin', user_id=2), data=dict(
-            username="newname",
+            username="newname",  # data dic is automatically converted by flask-form ??
             role=role_id,
             confirmed=True,
             active=True,
@@ -59,8 +59,8 @@ class AdminTestCase(BaseTestCase):
         self.assertEqual(user.active, False)
 
     def test_unblock_user(self):
-        response = self.client.post(url_for('admin.unblock_user', user_id=2),
-                                    follow_redirects=True)
+        response = self.client.post(url_for('admin.unblock_user', user_id=2),  # user 2 was blocked before ??
+                                    follow_redirects=True)  # is data affected by previous tests ??
         data = response.get_data(as_text=True)
         self.assertIn("Account unblocked", data)
 
@@ -77,8 +77,8 @@ class AdminTestCase(BaseTestCase):
         self.assertEqual(user.role.name, "Locked")
 
     def test_unlock_user(self):
-        user = User.query.get(2)
-        user.role = Role.query.filter_by(name='Locked').first().id
+        user = User.query.get(2)  # if affected by previous tests, then this seems make no sense
+        user.role = Role.query.filter_by(name='Locked').first()
         db.session.commit()
         self.assertEqual(user.role.name, "Locked")
 
@@ -86,7 +86,7 @@ class AdminTestCase(BaseTestCase):
                                     follow_redirects=True)
         data = response.get_data(as_text=True)
         self.assertIn("Account unlocked", data)
-
+        user = User.query.get(2)
         self.assertEqual(user.role.name, "User")
 
     def test_delete_tag(self):

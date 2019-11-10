@@ -63,20 +63,20 @@
                                             <span class="oi oi-star"></span> Collect
                                         </button>
                                     </form>
-                                {% endif %}
+                                {% endif %} {# end current_user.is_authenticated inside if photo #}
                             </div>
                             {% if photo.description %}
                                 <p class="card-text">{{ photo.description }}</p>
                             {% endif %}
                         </div>
                     </div>
-                {% endfor %}
-            {% else %}
+                {% endfor %} {# end  for photo #}
+            {% else %} {# else if photos #}
                 <div class="tip text-center">
                     <h3>No trends.</h3>
                     <p><a href="{{ url_for('.explore') }}">Explore</a></p>
                 </div>
-            {% endif %}
+            {% endif %} {# end if photos #}
         </div>
         <div class="col-md-3">
             {% include 'main/_sidebar.html' %}
@@ -85,7 +85,7 @@
     {% if photos %}
         {{ render_pagination(pagination, align='center') }}
     {% endif %}
-{% else %}
+{% else %} {# else if current_user.is_authenticated #}
     <div class="jumbotron">
         <div class="row">
             <div class="col-md-8">
@@ -98,5 +98,5 @@
             </div>
         </div>
     </div>
-{% endif %}
+{% endif %} # end if current_user.is_authenticated #}
 {% endblock %}

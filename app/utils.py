@@ -23,6 +23,7 @@ def generate_token(user, operation, expire_in=None, **kwargs):
 
     data = {'id': user.id, 'operation': operation}
     data.update(**kwargs)
+    # no need to save into database ??
     return s.dumps(data)
 
 

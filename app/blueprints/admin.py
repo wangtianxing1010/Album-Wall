@@ -150,7 +150,7 @@ def manage_photo(order):
         pagination = Photo.query.order_by(Photo.timestamp.desc()).paginate(page, per_page)
         order_rule = 'time'
     else:
-        pagination = Photo.query.order_by(Photo.flag.desc()).paginatie(page, per_page)
+        pagination = Photo.query.order_by(Photo.flag.desc()).paginate(page, per_page)
     photos = pagination.items
     return render_template('admin/manage_photo.html', photos=photos, order_rule=order_rule, pagination=pagination)
 
@@ -161,7 +161,7 @@ def manage_photo(order):
 def manage_tag():
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['ALBUM_WALL_MANAGE_TAG_PER_PAGE']
-    pagination = Tag.query.order_by(Tag.timestamp.desc()).paginate(page, per_page)
+    pagination = Tag.query.order_by(Tag.id.desc()).paginate(page, per_page)
     tags = pagination.items
     return render_template('admin/manage_tag.html', pagination=pagination, tags=tags)
 

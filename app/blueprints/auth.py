@@ -33,11 +33,11 @@ def login():
 @auth_bp.route('/re-authenticate', methods=["POST", "GET"])
 @login_required
 def re_authenticate():
-    if login_fresh():
+    if login_fresh():  # How does this do ??
         return redirect(url_for('main.index'))
     form = LoginForm()
     if form.validate_on_submit() and current_user.validate_password(form.password.data):
-        confirm_login()
+        confirm_login()  # How does this do ??
         return redirect_back()
     return render_template('auth/login.html', form=form)
 
@@ -125,7 +125,9 @@ def reset_password(token):
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None:
-            return redirect(url_for("main.index"))
+            return redirect(url_for("main.index")) # ??
+        #        flash("Invalid email", 'warning')
+        #     return redirect_back()
         if validate_token(user=user, token=token, operation=Operations.RESET_PASSWORD, new_password=form.password.data):
             flash("Password updated", 'success')
             return redirect(url_for('.login'))
