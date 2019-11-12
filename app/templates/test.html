@@ -1,0 +1,247 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <title>Register -Flask Album Wall</title>
+        <link rel="shortcut icon" href="/static/favicon.ico">
+
+            <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+            <link rel="stylesheet" href="/static/open-iconic/font/css/open-iconic-bootstrap.css">
+            <link rel="stylesheet" href="/static/css/style.css">
+
+
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <img src="/static/favicon.ico" alt="Album Wall">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                    aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+                <div class="navbar-nav mr-auto">
+
+
+    <a class="nav-item nav-link "
+       href="/">
+        Home
+    </a>
+
+
+
+
+    <a class="nav-item nav-link "
+       href="/explore">
+        Explore
+    </a>
+
+
+                    <form class="form-inline my-2 my-lg-0" action="/search">
+                        <input type="text" name="q" class="form-control mr-sm-1" placeholder="Photo, tag or user"
+                               required>
+                        <button class="btn btn-light my-2 my-sm-0" type="submit">
+                            <span class="oi oi-magnifying-glass"></span>
+                        </button>
+                    </form>
+                </div>
+                <div class="navbar-nav ml-auto">
+
+                    <a class="btn btn-outline-primary" href="/auth/login">Login</a>&nbsp;&nbsp;
+                    <a class="btn btn-primary" href="/auth/register">Join Album Wall</a>
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+<main>
+    <div class="container">
+
+
+
+    <div class="jumbotron">
+        <div class="row">
+            <div class="col-md-8">
+                <img src="/static/images/index.jpg" class="rounded img-fluid">
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-3 w-100 bg-light">
+                    <div class="card-header"><h4>Welcome to Album Wall!</h4></div>
+                    <div class="card-body">
+
+    <form action="" method="post"
+            class="form" role="form">
+
+
+
+
+
+
+
+
+
+    <div class="form-group required"><label class="form-control-label" for="name">Name</label>
+
+
+                        <input class="form-control" id="name" name="name" required type="text" value="Test">
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-group required"><label class="form-control-label" for="email">Email</label>
+
+
+                        <input class="form-control" id="email" name="email" required type="text" value="test@test.com">
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-group required"><label class="form-control-label" for="username">Username</label>
+
+
+                        <input class="form-control" id="username" name="username" required type="text" value="test">
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-group required"><label class="form-control-label" for="password">Password</label>
+
+
+                        <input class="form-control is-invalid" id="password" name="password" required type="password" value="">
+
+
+                        <div class="invalid-feedback">Field must be between 8 and 128 characters long.</div>
+        </div>
+
+
+
+
+
+
+
+
+
+    <div class="form-group required"><label class="form-control-label" for="password2">Confirm Password</label>
+
+
+                        <input class="form-control" id="password2" name="password2" required type="password" value="">
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <input class="btn btn-secondary" id="submit" name="submit" type="submit" value="Submit">
+
+
+
+
+
+    </form>
+                        <hr>
+                        <small>Already have an account? <a href="/auth/login">Click here to log in.</a>
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+            <footer>
+                <p class="float-left">
+                    <small>&copy; 2018
+                        <a href="http://nathanwang1010.wordpress.com" title="Nathan Wang Portfolio">Nathan Wang</a> -
+                        <a href="https://github.com/wangtianxing1010" title="See me on GitHub">GitHub</a> -
+                        <a href="http://flask-album773.herokuapp.com" title="An album sharing project">Album Wall</a>
+                    </small>
+                </p>
+                <p class="float-right">
+                    <small>Capture and share every wonderful moment.</small>
+                </p>
+            </footer>
+
+    </div>
+</main>
+<div id="toast"></div>
+
+
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/popper.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/moment-with-locales.min.js"></script>
+<script>
+moment.locale("en");
+function flask_moment_render(elem) {
+    $(elem).text(eval('moment("' + $(elem).data('timestamp') + '").' + $(elem).data('format') + ';'));
+    $(elem).removeClass('flask-moment').show();
+}
+function flask_moment_render_all() {
+    $('.flask-moment').each(function() {
+        flask_moment_render(this);
+        if ($(this).data('refresh')) {
+            (function(elem, interval) { setInterval(function() { flask_moment_render(elem) }, interval); })(this, $(this).data('refresh'));
+        }
+    })
+}
+$(document).ready(function() {
+    flask_moment_render_all();
+});
+</script>
+    <script src="/static/js/script.js"></script>
+    <script type="text/javascript">
+        var csrf_token = "IjdkNGE1YjY5MzJkMjdhNjIxYzg5N2QyZjQwMzVhY2NkNTkzYThiMzUi.EKuK0w.WBTZqxjga7XGxUhF028XTAfaoGA";
+
+            var is_authenticated = false;
+
+    </script>
+
+</body>
+</html>

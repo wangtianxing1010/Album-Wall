@@ -98,7 +98,7 @@ def resend_confirm_email():
     return redirect(url_for('main.index'))
 
 
-@auth_bp.route('/forget-password', methods=['POST','POST'])
+@auth_bp.route('/forget-password', methods=['POST', 'GET'])
 def forget_password():
     if current_user.is_authenticated:
         return redirect(url_for('main.index'))
@@ -109,7 +109,7 @@ def forget_password():
         if user:
             token = generate_token(user=user, operation=Operations.RESET_PASSWORD)
             send_reset_password_email(user=user, token=token)
-            flash("Password reset email to you, check your inbox", 'info')
+            flash("Password reset email sent, check your inbox", 'info')
             return redirect(url_for('.login'))
         flash("Invalid email", 'warning')
         return redirect(url_for('.forget_password'))
@@ -125,13 +125,11 @@ def reset_password(token):
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data.lower()).first()
         if user is None:
-            return redirect(url_for("main.index")) # ??
-        #        flash("Invalid email", 'warning')
-        #     return redirect_back()
+            return redirect(url_for("main.index"))
         if validate_token(user=user, token=token, operation=Operations.RESET_PASSWORD, new_password=form.password.data):
             flash("Password updated", 'success')
             return redirect(url_for('.login'))
         else:
-            flash("Invalid or expired Link", "danger")
+            flash("Invalid or expired link", "danger")
             return redirect(url_for('.forget_password'))
     return render_template('auth/reset_password.html', form=form)

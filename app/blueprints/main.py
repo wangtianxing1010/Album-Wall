@@ -16,9 +16,6 @@ from sqlalchemy.sql.expression import func
 
 main_bp = Blueprint('main', __name__)
 
-@main_bp.route('/new')
-def new_page():
-    return render_template('new.html')
 
 @main_bp.route('/')
 def index():

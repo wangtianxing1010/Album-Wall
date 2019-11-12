@@ -38,7 +38,7 @@ class ForgetPasswordForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired(), Length(1, 50), Email()])
-    password = PasswordField("Password", validators=[DataRequired, Length(1, 20), EqualTo('password2')])
+    password = PasswordField("Password", validators=[DataRequired(), Length(1, 20), EqualTo('password2')])
     password2 = PasswordField("Confirm Password", validators=[DataRequired()])
     submit = SubmitField()
 
