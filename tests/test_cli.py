@@ -51,5 +51,5 @@ class CLITestCase(BaseTestCase):
 
         self.assertIn('Generating 10 fake comments', result.output)
         self.assertEqual(10, Comment.query.count())
-        
+
         self.assertIn('Done', result.output)

@@ -1,0 +1,19 @@
+from flask import current_app
+
+from tests.base import BaseTestCase
+
+
+class BasicTestBase(BaseTestCase):
+
+    def test_app_exist(self):
+        self.assertFalse(current_app is None)
+
+    def test_app_is_testing(self):
+        self.assertTrue(current_app.config['TESTING'])
+
+    def test_404_error(self):
+        res = self.client.get('/foo')
+        data = res.get_data(as_text=True)
+        self.assertTrue(res.status_code, 404)
+        self.assertIn('404 Error', data)
+
