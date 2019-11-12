@@ -121,7 +121,7 @@ def collect(photo_id):
 
     current_user.collect(photo)
     flash("Photo Collected", 'success')
-    if current_user != photo.author and photo.author.receive_collect_notification:
+    if current_user != photo.author and photo.author.receive_collect_notifications:
         push_collect_notification(collector=current_user, photo_id=photo_id, receiver=photo.author)
     return redirect(url_for('.show_photo', photo_id=photo_id))
 
