@@ -95,7 +95,7 @@ def photo_next(photo_id):
     if photo_n is None:
         flash("This is already the last photo", 'warning')
         return redirect(url_for('.show_photo', photo_id=photo_id))
-    return redirect(url_for('.show_photo', photo_id=photo_n))
+    return redirect(url_for('.show_photo', photo_id=photo_n.id))
 
 
 @main_bp.route('/photo/p/<int:photo_id>')
@@ -106,7 +106,7 @@ def photo_previous(photo_id):
     if photo_p is None:
         flash("This is already the first photo", 'warning')
         return redirect(url_for('.show_photo', photo_id=photo_id))
-    return redirect(url_for('.show_photo', photo_id=photo_p))
+    return redirect(url_for('.show_photo', photo_id=photo_p.id))
 
 
 @main_bp.route('/collect/<int:photo_id>', methods=["POST"])
@@ -262,7 +262,7 @@ def reply_comment(comment_id):
                             author=comment.author.name) + '#comment-form')
 
 
-@main_bp.route('/delete/photo/<int:photo_id>', methods=["POST","GET"])
+@main_bp.route('/delete/photo/<int:photo_id>', methods=["POST", "GET"])
 @login_required
 def delete_photo(photo_id):
     photo = Photo.query.get_or_404(photo_id)
@@ -282,7 +282,7 @@ def delete_photo(photo_id):
     return redirect(url_for('.show_photo', photo_id=photo_n.id))
 
 
-@main_bp.route('/delete/comment/<int:comment_id>', methods=["POST","GET"])
+@main_bp.route('/delete/comment/<int:comment_id>', methods=["POST", "GET"])
 @login_required
 def delete_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
@@ -295,7 +295,7 @@ def delete_comment(comment_id):
     return redirect(url_for('.show_photo', photo_id=comment.photo.id))
 
 
-@main_bp.route('/tag/<int:tag_id>', defaults={'order':'by_time'})
+@main_bp.route('/tag/<int:tag_id>', defaults={'order': 'by_time'})
 @main_bp.route('/tag/<int:tag_id>/<order>')
 def show_by_tag(tag_id, order):
     tag = Tag.query.get_or_404(tag_id)
@@ -311,7 +311,7 @@ def show_by_tag(tag_id, order):
     return render_template('main/tag.html', tag=tag, pagination=pagination, photos=photos, order_rule=order_rule)
 
 
-@main_bp.route("/delete/tag/<int:photo_id>/<int:tag_id>", methods=["POST","GET"])
+@main_bp.route("/delete/tag/<int:photo_id>/<int:tag_id>", methods=["POST", "GET"])
 @login_required
 def delete_tag(photo_id, tag_id):
     tag = Tag.query.get_or_404(tag_id)
@@ -351,7 +351,7 @@ def read_notification(notification_id):
     if current_user != notification.receiver:
         abort(403)
 
-    notification.is_read()
+    notification.is_read = True
     db.session.commit()
     flash("Notification Archived", 'success')
     return redirect(url_for('.show_notifications'))
@@ -359,17 +359,17 @@ def read_notification(notification_id):
 
 @main_bp.route('/notifications/read/all', methods=["POST"])
 @login_required
-def read_all_notification():
+def read_all_notifications():
     for notification in current_user.notifications:
         notification.is_read = True
     db.session.commit()
-    flash("All notification archived", 'success')
+    flash("All notifications archived", 'success')
     return redirect(url_for('.show_notifications'))
 
 
 @main_bp.route('/search')
 def search():
-    q = request.args.get('q', '')
+    q = request.args.get('q', '').strip()
     if q == '':
         flash("Enter keyword about user, tag or photo", 'warning')
         return redirect_back()

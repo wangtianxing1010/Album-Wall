@@ -67,8 +67,11 @@ def edit_profile_admin(user_id):
 @permission_required("MODERATE")
 def block_user(user_id):
     user = User.query.get_or_404(user_id)
-    user.block()
-    flash('Account blocked', 'info')
+    if user.role.name in ['Administrator', "Moderator"]:
+        flash("Permission denied", "warning")
+    else:
+        user.block()
+        flash('Account blocked', 'info')
     return redirect_back()
 
 
@@ -87,8 +90,11 @@ def unblock_user(user_id):
 @permission_required("MODERATE")
 def lock_user(user_id):
     user = User.query.get_or_404(user_id)
-    user.lock()
-    flash('Account locked', 'info')
+    if user.role.name in ["Administrator", "Moderator"]:
+        flash("Permission denied", 'warning')
+    else:
+        user.lock()
+        flash('Account locked', 'info')
     return redirect_back()
 
 
@@ -113,7 +119,7 @@ def delete_tag(tag_id):
     return redirect_back()
 
 
-@admin_bp.route('/manage/user')
+@admin_bp.route('/manage/user/')
 @login_required
 @permission_required("MODERATE")
 def manage_user():

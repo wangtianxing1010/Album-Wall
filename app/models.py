@@ -267,7 +267,7 @@ class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text, nullable=False)
     is_read = db.Column(db.Boolean, default=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow())
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow(), index=True)
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     receiver = db.relationship('User', back_populates='notifications')
 

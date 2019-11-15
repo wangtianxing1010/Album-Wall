@@ -83,7 +83,7 @@ def show_following(username):
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=1)
     per_page = current_app.config['ALBUM_WALL_USER_PER_PAGE']
-    pagination = user.following.paginate(page, per_page)
+    pagination = user.followed.paginate(page, per_page)
     followings = pagination.items
     return render_template('user/following.html', followings=followings, pagination=pagination, user=user)
 
@@ -162,19 +162,19 @@ def change_password():
         db.session.commit()
         flash("Password updated", 'success')
         return redirect(url_for('.index', username=current_user.username))
-    return render_template("user/setting/change_password.html", form=form)
+    return render_template("user/settings/change_password.html", form=form)
 
 
 @user_bp.route('/settings/change-email', methods=["POST", "GET"])
 @fresh_login_required
 def change_email_request():
     form = ChangeEmailForm()
-    if form.validate_on_submit:
-        token = generate_token(user=current_user, operation=Operations.CHANGE_EMAIL, new_email=form.email.data)
-        send_confirmation_email(to=form.email.data, user=current_user, token=token)
-        flash("Confirm email sent, check inbox", 'success')
-        return redirect(url_for('.index', username=current_user.username))
-    return render_template('user/setting/change_email.html', form=form)
+    # if form.validate_on_submit:
+    #     token = generate_token(user=current_user, operation=Operations.CHANGE_EMAIL, new_email=form.email.data)
+    #     send_confirmation_email(to=form.email.data, user=current_user, token=token)
+    #     flash("Confirm email sent, check inbox", 'success')
+    #     return redirect(url_for('.index', username=current_user.username))
+    return render_template('user/settings/change_email.html', form=form)
 
 
 @user_bp.route("/change-email/<token>")
@@ -188,7 +188,7 @@ def change_email(token):
         return redirect(url_for('.change_email_request'))
 
 
-@user_bp.route("/setting/notification", methods=["POST", "GET"])
+@user_bp.route("/settings/notification", methods=["POST", "GET"])
 @login_required
 def notification_setting():
     form = NotificationSettingForm()
@@ -202,7 +202,7 @@ def notification_setting():
     form.receive_comment_notification.data = current_user.receive_comment_notification
     form.receive_collect_notification.data = current_user.receive_collect_notification
     form.receive_follow_notification.data = current_user.receive_follow_notification
-    return render_template('user/setting/edit_notification.html', form=form)
+    return render_template('user/settings/edit_notification.html', form=form)
 
 
 @user_bp.route("/settings/privacy", methods=["POST", "GET"])
@@ -215,7 +215,7 @@ def privacy_setting():
         flash("Privacy setting updated", 'success')
         return redirect(url_for('.index', username=current_user.username))
     form.public_collections.data = current_user.public_collections
-    return render_template('user/setting/privacy', form=form)
+    return render_template('user/settings/privacy', form=form)
 
 
 @user_bp.route('/settings/account/delete/', methods=["POST", "GET"])
@@ -226,4 +226,4 @@ def delete_account():
         db.session.delete(current_user._get_current_object())
         flash("Your are kicked out, goodbye!", 'danger')
         return redirect(url_for('main.index'))
-    return render_template('user/setting/delete_account.html', form=form)
+    return render_template('user/settings/delete_account.html', form=form)

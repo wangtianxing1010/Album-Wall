@@ -4,6 +4,8 @@ import click
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFError
 from flask_login import current_user
+import rq
+from redis import Redis
 
 from app.blueprints.main import main_bp
 from app.blueprints.auth import auth_bp
@@ -30,6 +32,9 @@ def create_app(config_name=None):
     register_template_context(app)
     register_errorhandlers(app)
     register_commands(app)
+
+    app.redis = Redis.from_url(app.config["REDIS_URL"])
+    app.task_queue = rq.Queue("flask-album-tasks", connection=app.redis)
 
     return app
 

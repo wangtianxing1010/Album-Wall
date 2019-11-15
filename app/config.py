@@ -42,32 +42,34 @@ class BaseConfig:
 
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    ALBUM_WALL_MAIL_SUBJECT_PREFIX = '[ALBUMY]'
-    MAIL_SERVER = os.getenv("MAIL_SERVER")
+    ALBUM_WALL_MAIL_SUBJECT_PREFIX = '[ALBUM Wall]'
+    MAIL_SERVER = os.getenv("MAIL_SERVER") or 'localhost'
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USERNAME = os.getenv('MAIL_USERNAME')
     MAIL_PASSWORD = os.getenv('MAIL_PASSWORD')
-    MAIL_DEFAULT_SENDER = ("Albumy admin", MAIL_USERNAME)
+    MAIL_DEFAULT_SENDER = ("Album wall admin", MAIL_USERNAME)
 
     DROPZONE_ALLOWED_FILE_TYPE = 'image'
     DROPZONE_MAX_FILE_SIZE = 3
     DROPZONE_MAX_FILES = 30
     DROPZONE_ENABLE_CSRF = True
 
-    WHOOSHEE_MIN_STRING_LENGTH = 1
+    REDIS_URL = os.environ.get("REDIS_URL") or 'redis://'
+
+    WHOOSHEE_MIN_STRING_LEN = 1
 
 
 class DevelopmentConfig(BaseConfig):
     SQLALCHEMY_DATABASE_URI = prefix + os.path.join(basedir, 'data-dev.db')
-    REDIS_URL = 'redis://localhost'
+    REDIS_URL = os.environ.get("REDIS_URL") or 'redis://localhost'
 
 
 class TestingConfig(BaseConfig):
     TESTING = True
     WTF_CSRF_ENABLED = False
     WHOOSHEE_MEMORY_STORAGE = True
-    SQLALCHEMY_DATABASE_URI = "sqlite:///" # in-memory database
+    SQLALCHEMY_DATABASE_URI = "sqlite:///"  # in-memory database
 
 
 class ProductionConfig(BaseConfig):
@@ -80,9 +82,14 @@ class Operations:
     CHANGE_EMAIL = 'change-email'
 
 
+class HerokuConfig(ProductionConfig):
+    pass
+
+
 config = {
-    'default':DevelopmentConfig,
+    'default': DevelopmentConfig,
     "development": DevelopmentConfig,
     'production': ProductionConfig,
-    'testing':TestingConfig
+    'testing': TestingConfig,
+    'heroku': HerokuConfig
 }

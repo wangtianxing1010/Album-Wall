@@ -28,7 +28,7 @@
                     {% elif category == 'user' %}
                         {{ user_card(item) }}
                     {% else %}
-                        <a class="badge badge-light" href="{{ url_for('.show_tag', tag_id=item.id) }}">
+                        <a class="badge badge-light" href="{{ url_for('.show_by_tag', tag_id=item.id) }}">
                             {{ item.name }} {{ item.photos|length }}
                         </a>
                     {% endif %}
