@@ -199,8 +199,126 @@ class MainTestCase(BaseTestCase):
         data = res.get_data(as_text=True)
         self.assertIn('Not collected yet', data)
 
-    def 
+    def test_report_comment(self):
+        self.assertEqual(Comment.query.get(1).flag, 0)
 
+        self.login()
+        res = self.client.post(url_for('main.report_comment', comment_id=1), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Comment reported", data)
+        self.assertEqual(Comment.query.get(1).flag, 1)
 
+    def test_report_photo(self):
+        self.assertEqual(Photo.query.get(1).flag, 0)
 
+        self.login()
+        res = self.client.post(url_for('main.report_photo', photo_id=1), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn('Photo reported', data)
+        self.assertEqual(Photo.query.get(1).flag, 1)
 
+    def test_show_collectors(self):
+        user = User.query.get(2)
+        user.collect(Photo.query.get(1))
+        res = self.client.get(url_for('main.show_collectors', photo_id=1), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("1 Collectors", data)
+        self.assertIn("Common User", data)
+
+    def test_edit_description(self):
+        self.assertEqual(Photo.query.get(2).description, "Photo 2")
+
+        self.login()
+        res = self.client.post(url_for('main.edit_description', photo_id=2), data=dict(
+            description="test edit description"
+        ), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertEqual("test edit description", Photo.query.get(2).description)
+        self.assertIn("Description Updated", data)
+
+    def test_new_comment(self):
+        self.login()
+        res = self.client.post(url_for('main.new_comment', photo_id=1), data=dict(
+            body="common user test comment"
+        ), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Comment posted", data)
+        self.assertEqual(Photo.query.get(1).comments[1].body, "common user test comment")
+
+    def test_new_tag(self):
+        self.login("admin@test.com", "123456")
+
+        res = self.client.post(url_for('main.new_tag', photo_id=1), data=dict(
+            tag="test tag from admin user"
+        ), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("Tag added", data)
+
+        self.assertEqual(Photo.query.get(1).tags[1].name, "test")
+        self.assertEqual(Photo.query.get(1).tags[2].name, "tag")
+        self.assertEqual(Photo.query.get(1).tags[3].name, "from")
+        self.assertEqual(Photo.query.get(1).tags[4].name, "admin")
+        self.assertEqual(Photo.query.get(1).tags[5].name, "user")
+
+    def test_allow_comment(self):
+        self.login('admin@test.com', '123456')
+        res = self.client.post(url_for('main.allow_comment', photo_id=2), follow_redirects=True)
+        self.assertEqual(res.status_code, 403)
+
+        self.logout()
+        self.login()
+        res = self.client.post(url_for('main.allow_comment', photo_id=2), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("Comment Disabled", data)
+        self.assertFalse(Photo.query.get(2).comment_allowed)
+
+        res = self.client.post(url_for('main.allow_comment', photo_id=2), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("Comment Enabled", data)
+        self.assertTrue(Photo.query.get(2).comment_allowed)
+
+    def test_reply_comment(self):
+        self.login()
+        res = self.client.get(url_for('main.reply_comment', comment_id=1), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Reply to", data)
+
+    def test_delete_photo(self):
+        self.login()
+        res = self.client.post(url_for('main.delete_photo', photo_id=2), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Photo deleted", data)
+        self.assertIn("Common User", data)
+
+    def test_delete_comment(self):
+        self.login('admin@test.com', '123456')
+        res = self.client.post(url_for('main.delete_comment', comment_id=1), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Comment deleted", data)
+        self.assertIn("Photo 1", data)
+
+    def test_show_by_tag(self):
+        res = self.client.get(url_for('main.show_by_tag', tag_id=1))
+        data = res.get_data(as_text=True)
+        self.assertIn("Order by time", data)
+
+        res = self.client.get(url_for('main.show_by_tag', tag_id=1, order="by_collections"))
+        data = res.get_data(as_text=True)
+        self.assertIn("Order by collections", data)
+
+    def test_delete_tag(self):
+        photo = Photo.query.get(2)
+        tag = Tag(name='test')
+        photo.tags.append(tag)
+        db.session.commit()
+
+        self.login()
+        res = self.client.post(url_for('main.delete_tag', photo_id=2, tag_id=2), follow_redirects=True)
+        data = res.get_data(as_text=True)
+        self.assertIn("Tag deleted", data)
+
+        self.assertEqual(photo.tags, [])
+        self.assertIsNone(Tag.query.get(2))

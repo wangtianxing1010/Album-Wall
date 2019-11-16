@@ -17,8 +17,11 @@
     <div class="row">
         <div class="col-md-12">
             <h3>{{ photo.collectors|length }} Collectors</h3>
-            {% for collect in collections %}
-                {{ user_card(user=collect.collector) }}
+            {% if not collections %}
+                No collection
+            {% endif %}
+            {% for collection in collections %}
+                {{ user_card(user=collection.collector) }}
             {% endfor %}
         </div>
     </div>

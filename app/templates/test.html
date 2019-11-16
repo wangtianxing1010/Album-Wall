@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-        <title>Register -Flask Album Wall</title>
+        <title>Admin User's Photo -Flask Album Wall</title>
         <link rel="shortcut icon" href="/static/favicon.ico">
 
             <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -56,8 +56,37 @@
                 </div>
                 <div class="navbar-nav ml-auto">
 
-                    <a class="btn btn-outline-primary" href="/auth/login">Login</a>&nbsp;&nbsp;
-                    <a class="btn btn-primary" href="/auth/register">Join Album Wall</a>
+                    <a class="nav-item nav-link" href="/notifications?filter=unread">
+                        <span class="oi oi-bell"></span>
+                        <span id="notification-badge"
+                              class="hide badge badge-danger badge-notification"
+                              data-href="/ajax/notificatons-count/">0</span>
+                    </a>
+                    <a class="nav-item nav-link" href="/upload" title="Upload">
+                        <span class="oi oi-cloud-upload"></span>&nbsp;&nbsp;
+                    </a>
+                    <div class="dropdown nav-item">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-expanded="false">
+                            <img class="avatar-xs"
+                                 src="/avatars/common_s.png">
+                            <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                            <h6 class="dropdown-header">Logged in as common</h6>
+                            <a class="dropdown-item" href="/user/common/">
+                                <span class="oi oi-person"></span> My Home
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/user/settings/profile">
+                                <span class="oi oi-cog"></span> Settings
+                            </a>
+
+                            <a class="dropdown-item" href="/auth/logout">
+                                <span class="oi oi-power-standby"></span> Logout
+                            </a>
+                        </div>
+                    </div>
 
                 </div>
             </div>
@@ -70,31 +99,113 @@
 
 
 
-    <div class="jumbotron">
-        <div class="row">
-            <div class="col-md-8">
-                <img src="/static/images/index.jpg" class="rounded img-fluid">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="photo">
+                <a href="/uploads/test.jpg" target="_blank">
+                    <img class="img-fluid" src="/uploads/test_m.jpg">
+                </a>
             </div>
-            <div class="col-md-4">
-                <div class="card mb-3 w-100 bg-light">
-                    <div class="card-header"><h4>Welcome to Album Wall!</h4></div>
-                    <div class="card-body">
-
-    <form action="" method="post"
-            class="form" role="form">
+            <a class="btn btn-primary btn-sm text-white" data-toggle="modal" data-target="#share-modal">Share</a>
 
 
+                <form class="inline" method="post" action="/report/photo/1">
+                    <input type="hidden" name="csrf_token" value="ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM">
+                    <button type="submit" class="btn btn-link btn-sm">Report</button>
+                </form>
+
+            <p class="text-muted float-right small">
+                <span class="oi oi-clock"></span> Upload at <span class="flask-moment" data-timestamp="2019-11-16T20:35:33Z" data-format="format('LL')" data-refresh="0" style="display: none">2019-11-16T20:35:33Z</span>
+            </p>
+            <div class="comments" id="comments">
+    <h3>1 Comments
+        <small>
+            <a href="/photo/1?page=1#comment-form">latest</a>
+        </small>
+
+    </h3>
+    <hr>
+
+
+            <div class="comment">
+                <div class="comment-thumbnail">
+                    <a href="/user/common/">
+                        <img class="rounded img-fluid avatar-s profile-popover"
+                             data-href="/ajax/profile/2"
+                             src="/avatars/common_m.png">
+                    </a>
+                </div>
+                <div class="comment-body">
+                    <h6>
+                        <a class="profile-popover"
+                           data-href="/ajax/profile/2"
+                           href="/user/common/">
+                            Common User
+                        </a>
+
+                        <small data-toggle="tooltip" data-placement="top" data-timestamp="2019-11-16 20:35:33.768949"
+                               data-delay="500">
+                            <span class="flask-moment" data-timestamp="2019-11-16T20:35:33Z" data-format="fromNow(0)" data-refresh="60000" style="display: none">2019-11-16T20:35:33Z</span>
+                        </small>
+
+                            <span class="float-right">
+                            <span class="dropdown">
+                                <button class="btn btn-sm btn-light" type="button" id="dropdownMenuButton"
+                                        data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                <span class="oi oi-ellipses"></span>
+                                </button>
+                                <span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+
+                                        <a class="dropdown-item" data-toggle="modal" href="#!"
+                                           data-href="/delete/comment/1"
+                                           data-target="#confirm-delete">
+                                        <span class="oi oi-trash" aria-hidden="true"></span> Delete
+                                      </a>
+
+                                    <form class="inline" method="post"
+                                          action="/report/comment/1">
+                                    <input type="hidden" name="csrf_token" value="ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM">
+                                <button type="submit" class="dropdown-item">
+                                        <span class="oi oi-warning" aria-hidden="true"></span> Report
+                                      </button>
+                                </form>
+                                </span>
+                                </span>
+                            </span>
+
+                    </h6>
+                    <p>
+
+                        test comment body
+                    </p>
+                </div>
+            </div>
+            <hr>
+
+        <div class="page-footer">
+
+
+            <nav aria-label="Page navigation">
+                <ul class="pagination ">
+
+                    <li class="page-item disabled">
+                            <a class="page-link" href="#">&laquo;</a>
+                        </li>
+
+
+                                <li class="page-item active">
+                                    <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
+                                </li>
 
 
 
+                    <li class="page-item disabled">
+                            <a class="page-link" href="#">&raquo;</a>
+                        </li></ul>
+            </nav>
 
-
-
-
-    <div class="form-group required"><label class="form-control-label" for="name">Name</label>
-
-
-                        <input class="form-control" id="name" name="name" required type="text" value="Test">
 
 
         </div>
@@ -104,32 +215,20 @@
 
 
 
+                    <div class="alert alert-dark">
+                        Reply to Common User:
+                        <a class="float-right" href="/photo/1">Cancel</a>
+                    </div>
 
+                <div class="comment-form-area">
+                    <div class="comment-form-thumbnail">
+                        <img class="rounded img-fluid avatar-s"
+                             src="/avatars/common_m.png">
+                    </div>
+                    <div class="comment-form" id="comment-form">
 
-
-    <div class="form-group required"><label class="form-control-label" for="email">Email</label>
-
-
-                        <input class="form-control" id="email" name="email" required type="text" value="test@test.com">
-
-
-        </div>
-
-
-
-
-
-
-
-
-
-    <div class="form-group required"><label class="form-control-label" for="username">Username</label>
-
-
-                        <input class="form-control" id="username" name="username" required type="text" value="test">
-
-
-        </div>
+    <form action="/photo/1/comment/new?page=1" method="post"
+            class="form text-right" role="form">
 
 
 
@@ -139,27 +238,10 @@
 
 
 
-    <div class="form-group required"><label class="form-control-label" for="password">Password</label>
+    <div class="form-group required"><label class="form-control-label" for="body">Comment here</label>
 
 
-                        <input class="form-control is-invalid" id="password" name="password" required type="password" value="">
-
-
-                        <div class="invalid-feedback">Field must be between 8 and 128 characters long.</div>
-        </div>
-
-
-
-
-
-
-
-
-
-    <div class="form-group required"><label class="form-control-label" for="password2">Confirm Password</label>
-
-
-                        <input class="form-control" id="password2" name="password2" required type="password" value="">
+                        <textarea class="form-control" id="body" name="body" required></textarea>
 
 
         </div>
@@ -184,14 +266,140 @@
 
 
     </form>
-                        <hr>
-                        <small>Already have an account? <a href="/auth/login">Click here to log in.</a>
-                        </small>
                     </div>
+                </div>
+
+
+
+</div>
+        </div>
+        <div class="col-md-4">
+
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li class="page-item">
+            <a class="page-link" href="/photo/p/1">&larr;Previous</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="/photo/n/1">Next&rarr;</a>
+        </li>
+    </ul>
+</nav>
+<div class="card bg-light mb-3 w-100 sidebar-card">
+    <div class="card-body">
+        <div class="row">
+            <a href="/user/admin/">
+                <img class="sidebar-avatar rounded avatar-m"
+                     src="/avatars/admin_m.png">
+            </a>
+            <div class="sidebar-profile">
+                <h6 class="card-title">
+                    <a href="/user/admin/">Admin User</a>
+                </h6>
+                <p class="card-subtitle mb-2 text-muted">admin</p>
+
+
+
+
+                <form class="inline" method="post"
+                      action="/user/unfollow/admin?next=%2Fphoto%2F1%3Freply%3D1%26author%3DCommon%2BUser">
+                    <input type="hidden" name="csrf_token" value="ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM">
+                    <button type="submit" class="btn btn-dark btn-sm">Unfollow</button>
+
+                        <p class="badge badge-light">Following each other</p>
+
+                </form>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card bg-light mb-3 w-100">
+    <div class="card-body">
+        <div id="description">
+            <p>
+
+                    Photo 1
+
+
+            </p>
+        </div>
+
+        <div id="tags">
+            <p>
+
+
+                        <a class="badge badge-light"
+                           href="/tag/1" target="_blank"><span
+                                class="oi oi-tag"></span> test tag</a>
+
+
+
+            </p>
+        </div>
+
+
+
+                <form class="inline" method="post"
+                      action="/collect/1">
+                    <input type="hidden" name="csrf_token" value="ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM">
+                    <button type="submit" class="btn btn-outline-primary btn-sm">
+                        <span class="oi oi-star"></span> Collect
+                    </button>
+                </form>
+
+
+
+    </div>
+</div>
+        </div>
+    </div>
+    <!-- share modal -->
+    <div class="modal fade" id="share-modal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="shareModalLabel">Permalink</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body w-100">
+                    <input class="form-control" value="http://localhost/photo/1"
+                           readonly>
                 </div>
             </div>
         </div>
     </div>
+    <!-- delete confirm modal -->
+
+        <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="confirmModalLabel">Delete Confirm</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to delete this item?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form class="delete-form" action="" method="post">
+                            <input type="hidden" name="csrf_token" value="ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <button class="btn btn-danger btn-confirm" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
 
 
 
@@ -237,9 +445,9 @@ $(document).ready(function() {
 </script>
     <script src="/static/js/script.js"></script>
     <script type="text/javascript">
-        var csrf_token = "IjdkNGE1YjY5MzJkMjdhNjIxYzg5N2QyZjQwMzVhY2NkNTkzYThiMzUi.EKuK0w.WBTZqxjga7XGxUhF028XTAfaoGA";
+        var csrf_token = "ImM5YTc3MWQ2YTg0MWE4Y2JjZGM4ZGY3ZGY5MzQ1ZTQ4MDNmZjA2MDEi.ELHvGQ.VvZtjCg0SQ74Jb9SmDtZAnO2LiM";
 
-            var is_authenticated = false;
+            var is_authenticated = true;
 
     </script>
 

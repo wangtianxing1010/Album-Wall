@@ -17,6 +17,11 @@ from sqlalchemy.sql.expression import func
 main_bp = Blueprint('main', __name__)
 
 
+@main_bp.route('/test')
+def test():
+    return render_template('test.html')
+
+
 @main_bp.route('/')
 def index():
     if current_user.is_authenticated:
@@ -140,12 +145,12 @@ def uncollect(photo_id):
 
 
 @main_bp.route('/photo/<int:photo_id>/collectors')
-def show_collections(photo_id):
+def show_collectors(photo_id):
     photo = Photo.query.get_or_404(photo_id)
     page = request.args.get('page', 1, type=int)
     per_page = current_app.config['ALBUM_WALL_COMMENT_PER_PAGE']
     pagination = Collect.query.with_parent(photo).paginate(page, per_page)
-    collections = pagination.items
+    collections = pagination.items  # collection.collector will be retrieved in the template
     return render_template('main/collectors.html', collections=collections, photo=photo, pagination=pagination)
 
 
@@ -156,7 +161,7 @@ def report_comment(comment_id):
     comment = Comment.query.get_or_404(comment_id)
     comment.flag += 1
     db.session.commit()
-    flash("comment reported", 'success')
+    flash("Comment reported", 'success')
     return redirect(url_for('.show_photo', photo_id=comment.photo.id))
 
 
@@ -168,7 +173,7 @@ def report_photo(photo_id):
     photo.flag += 1
     db.session.commit()
     flash("Photo reported, Thanks", 'success')
-    return redirect(url_for('.show_photo'), photo_id=photo_id)
+    return redirect(url_for('.show_photo', photo_id=photo_id))
 
 
 @main_bp.route('/photo/<int:photo_id>/description', methods=["POST", "GET"])
@@ -195,21 +200,24 @@ def edit_description(photo_id):
 def new_comment(photo_id):
     photo = Photo.query.get_or_404(photo_id)
     page = request.args.get("page", 1, type=int)
+    if not photo.comment_allowed:
+        flash("Comment Disabled")
+        return redirect(url_for('.show_photo', photo_id=photo_id, page=page))
     form = CommentForm()
     if form.validate_on_submit():
         body = form.body.data
         author = current_user._get_current_object()
-        comment = CommentForm(photo=photo, body=body, author=author)
+        comment = Comment(photo=photo, body=body, author=author)
 
         replying_to_id = request.args.get('reply')
         if replying_to_id:
             comment.replying_to = Comment.query.get_or_404(replying_to_id)
-            if comment.replying_to.author.receive_comment_notification:
+            if comment.replying_to.author.receive_comment_notifications:
                 push_comment_notification(photo_id=photo_id, receiver=comment.replying_to.author)
         db.session.add(comment)
         db.session.commit()
         flash("Comment posted", 'success')
-        if current_user != photo.author and photo.author.receive_comment_notification:
+        if current_user != photo.author and photo.author.receive_comment_notifications:
             push_comment_notification(photo_id, receiver=photo.author, page=page)
     flash_errors(form)
     return redirect(url_for('.show_photo', photo_id=photo_id, page=page))
@@ -232,10 +240,10 @@ def new_tag(photo_id):
                 db.session.commit()
             if tag not in photo.tags:
                 photo.tags.append(tag)
-                db.commit()
+                db.session.commit()
         flash("Tag added", 'success')
     flash_errors(form)
-    return render_template('.show_photo', photo_id=photo_id)
+    return redirect(url_for('.show_photo', photo_id=photo_id))
 
 
 @main_bp.route("/allow_comment/<int:photo_id>", methods=['POST'])
@@ -305,9 +313,9 @@ def show_by_tag(tag_id, order):
     pagination = Photo.query.with_parent(tag).order_by(Photo.timestamp.desc()).paginate(page, per_page)
     photos = pagination.items
 
-    if order == 'by_collects':
+    if order == 'by_collections':
         photos.sort(key=lambda x: len(x.collectors), reverse=True)
-        order_rule = 'collects'
+        order_rule = 'collections'
     return render_template('main/tag.html', tag=tag, pagination=pagination, photos=photos, order_rule=order_rule)
 
 
@@ -319,7 +327,7 @@ def delete_tag(photo_id, tag_id):
     if current_user != photo.author and not current_user.can("MODERATE"):
         abort(403)
     photo.tags.remove(tag)
-    db.session.commmit()
+    db.session.commit()
 
     if not tag.photos:
         db.session.delete(tag)

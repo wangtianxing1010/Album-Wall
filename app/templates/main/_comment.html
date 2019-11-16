@@ -76,7 +76,7 @@
                             Reply
                             <a href="{{ url_for('user.index', username=comment.replied.author.username) }}">{{ comment.replied.author.name }}</a>
                             :
-                        {%- endif -%}
+                        {% endif %}
                         {{ comment.body }}
                     </p>
                 </div>
@@ -90,7 +90,7 @@
         <p class="tip">No comments.</p>
     {% endif %}
 
-    {% if photo.can_comment %}
+    {% if photo.comment_allowed %}
         {% if current_user.is_authenticated %}
             {% if current_user.can('COMMENT') %}
                 {% if request.args.get('reply') %}

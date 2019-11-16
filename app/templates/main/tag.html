@@ -21,12 +21,12 @@
                 Order by {{ order_rule }} <span class="oi oi-elevator"></span>
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                {% if order_rule == 'collects' %}
+                {% if order_rule == 'collections' %}
                     <a class="dropdown-item" href="{{ url_for('.show_by_tag', tag_id=tag.id, order='by_time') }}">Order by
-                    Time</a>
+                    time</a>
                 {% else %}
-                    <a class="dropdown-item" href="{{ url_for('.show_by_tag', tag_id=tag.id, order='by_collects') }}">Order by
-                    Collects</a>
+                    <a class="dropdown-item" href="{{ url_for('.show_by_tag', tag_id=tag.id, order='by_collections') }}">Order by
+                    collections</a>
                 {% endif %}
             </div>
         </span>
