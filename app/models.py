@@ -109,6 +109,7 @@ class User(db.Model, UserMixin):
                                 lazy='dynamic', cascade='all')
     followers = db.relationship("Follow", foreign_keys=[Follow.followed_id], back_populates='followed',
                                 lazy='dynamic', cascade='all')
+    # todo ?? need to indicate foreign key for notification ?
     notifications = db.relationship("Notification", back_populates='receiver', cascade='all')
 
     def __init__(self, **kwargs):
@@ -141,7 +142,7 @@ class User(db.Model, UserMixin):
             db.session.commit()
 
     def unfollow(self, user):
-        follow = self.following.filter_by(followed_id=user.id).first()
+        follow = self.followed.filter_by(followed_id=user.id).first()
         if follow:
             db.session.delete(follow)
             db.session.commit()
@@ -149,10 +150,10 @@ class User(db.Model, UserMixin):
     def is_following(self, user):
         if user.id is None: # when following self, user.id is none
             return False
-        return self.followed.filter_by(followed_id=user.id) is not None
+        return self.followed.filter_by(followed_id=user.id).first() is not None
 
     def is_followed_by(self, user):
-        return self.followers.filter_by(follower_id=user.id) is not None
+        return self.followers.filter_by(follower_id=user.id).first() is not None
 
     @property
     def followed_photos(self):
@@ -202,7 +203,8 @@ class User(db.Model, UserMixin):
     def can(self, permission_name):
         permission = Permission.query.filter_by(name=permission_name).first()
         return permission is not None and self.role is not None and permission in self.role.permissions
-    # Why check self.role existing??
+    # Why check self.role existing
+    # in case role was not specified ?
 
     def generate_avatar(self):
         avatar = Identicon()
@@ -267,8 +269,10 @@ class Notification(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     message = db.Column(db.Text, nullable=False)
     is_read = db.Column(db.Boolean, default=False)
-    timestamp = db.Column(db.DateTime, default=datetime.utcnow(), index=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+
     receiver_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     receiver = db.relationship('User', back_populates='notifications')
 
 

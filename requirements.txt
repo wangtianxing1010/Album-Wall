@@ -21,6 +21,8 @@ Pillow==5.2.0
 python-dateutil==2.7.3
 python-dotenv==0.9.1
 PyYAML==3.13
+redis==3.3.11
+rq==1.1.0
 six==1.11.0
 SQLAlchemy==1.2.12
 text-unidecode==1.2

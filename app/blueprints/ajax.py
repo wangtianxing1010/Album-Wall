@@ -10,6 +10,7 @@ ajax_bp = Blueprint('ajax', __name__)
 @ajax_bp.route('/profile/<int:user_id>')
 def get_profile(user_id):
     user = User.query.get_or_404(user_id)
+    # todo render_template ??
     return render_template('main/profile_popup.html', user=user)
 
 
@@ -42,6 +43,7 @@ def follow(username):
 
 
 @ajax_bp.route('/unfollow/<username>', methods=['POST'])
+# todo ?? login required
 def unfollow(username):
     if not current_user.is_authenticated:
         return jsonify(message='Login required'), 403
@@ -58,9 +60,8 @@ def unfollow(username):
 def notifications_count():
     if not current_user.is_authenticated:
         return jsonify(message="Login required"), 403
-
     count = Notification.query.with_parent(current_user).filter_by(is_read=False).count()
-    return jsonify(count=count)
+    return jsonify(count=count), 200  # todo ?? status is 200
 
 
 @ajax_bp.route('/<int:photo_id>/followers-count')
@@ -77,14 +78,14 @@ def collect(photo_id):
     if not current_user.confirmed:
         return jsonify(message="Account confirmation required"), 400
     if not current_user.can("COLLECT"):
-        return jsonify(message="permision required"), 403
+        return jsonify(message="Permission required"), 403
 
     photo = Photo.query.get_or_404(photo_id)
     if current_user.is_collecting(photo):
         return jsonify(message="Already collected"), 400
 
     current_user.collect(photo)
-    if current_user != photo.author and photo.author.receive_collect_notification:
+    if current_user != photo.author and photo.author.receive_collect_notifications:
         push_collect_notification(current_user, photo_id, photo.author)
     return jsonify(message="Photo collected")
 

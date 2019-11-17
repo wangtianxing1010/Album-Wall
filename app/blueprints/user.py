@@ -47,7 +47,6 @@ def follow(username):
     if current_user.is_following(user):
         flash("Already followed", 'warning')
         return redirect(url_for('.index', username=username))
-
     current_user.follow(user)
     flash("User followed", 'success')
     if user.receive_follow_notifications:
@@ -59,12 +58,12 @@ def follow(username):
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first_or_404()
-    if not current_user.is_following(user):
-        current_user.is_unfollow(user)
+    if current_user.is_following(user):
+        current_user.unfollow(user)
         flash("User unfollowed", 'success')
         return redirect_back()
 
-    flash("Not followed", 'warning')
+    flash("Not yet followed", 'warning')
     return redirect(url_for('.index', username=username))
 
 
@@ -75,7 +74,7 @@ def show_followers(username):
     per_page = current_app.config['ALBUM_WALL_USER_PER_PAGE']
     pagination = user.followers.paginate(page, per_page)
     followers = pagination.items
-    return render_template('user/followers.html', followers=followers, user=user, pagination=pagination)
+    return render_template('user/followers.html', follows=followers, user=user, pagination=pagination)
 
 
 @user_bp.route('/<username>/following')
@@ -85,7 +84,7 @@ def show_following(username):
     per_page = current_app.config['ALBUM_WALL_USER_PER_PAGE']
     pagination = user.followed.paginate(page, per_page)
     followings = pagination.items
-    return render_template('user/following.html', followings=followings, pagination=pagination, user=user)
+    return render_template('user/following.html', follows=followings, pagination=pagination, user=user)
 
 
 @user_bp.route('/settings/profile', methods=["POST", "GET"])
@@ -169,11 +168,11 @@ def change_password():
 @fresh_login_required
 def change_email_request():
     form = ChangeEmailForm()
-    # if form.validate_on_submit:
-    #     token = generate_token(user=current_user, operation=Operations.CHANGE_EMAIL, new_email=form.email.data)
-    #     send_confirmation_email(to=form.email.data, user=current_user, token=token)
-    #     flash("Confirm email sent, check inbox", 'success')
-    #     return redirect(url_for('.index', username=current_user.username))
+    if form.validate_on_submit():
+        token = generate_token(user=current_user, operation=Operations.CHANGE_EMAIL, new_email=form.email.data)
+        send_confirmation_email(to=form.email.data, user=current_user, token=token)
+        flash("Confirm email sent, check inbox", 'success')
+        return redirect(url_for('.index', username=current_user.username))
     return render_template('user/settings/change_email.html', form=form)
 
 
@@ -193,15 +192,15 @@ def change_email(token):
 def notification_setting():
     form = NotificationSettingForm()
     if form.validate_on_submit():
-        current_user.receive_comment_notification = form.receive_comment_notification.data
-        current_user.receive_collect_notification = form.receive_collect_notification.data
-        current_user.receive_follow_notification = form.receive_follow_notification.data
+        current_user.receive_comment_notifications = form.receive_comment_notifications.data
+        current_user.receive_collect_notifications = form.receive_collect_notifications.data
+        current_user.receive_follow_notifications = form.receive_follow_notifications.data
         db.session.commit()
         flash("Setting updated", 'success')
         return redirect(url_for('.index', username=current_user.username))
-    form.receive_comment_notification.data = current_user.receive_comment_notification
-    form.receive_collect_notification.data = current_user.receive_collect_notification
-    form.receive_follow_notification.data = current_user.receive_follow_notification
+    form.receive_comment_notifications.data = current_user.receive_comment_notifications
+    form.receive_collect_notifications.data = current_user.receive_collect_notifications
+    form.receive_follow_notifications.data = current_user.receive_follow_notifications
     return render_template('user/settings/edit_notification.html', form=form)
 
 
@@ -215,7 +214,7 @@ def privacy_setting():
         flash("Privacy setting updated", 'success')
         return redirect(url_for('.index', username=current_user.username))
     form.public_collections.data = current_user.public_collections
-    return render_template('user/settings/privacy', form=form)
+    return render_template('user/settings/edit_privacy.html', form=form)
 
 
 @user_bp.route('/settings/account/delete/', methods=["POST", "GET"])
@@ -224,6 +223,7 @@ def delete_account():
     form = DeleteAccountForm()
     if form.validate_on_submit():
         db.session.delete(current_user._get_current_object())
+        db.session.commit()
         flash("Your are kicked out, goodbye!", 'danger')
         return redirect(url_for('main.index'))
     return render_template('user/settings/delete_account.html', form=form)

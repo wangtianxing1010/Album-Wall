@@ -47,9 +47,9 @@ class ChangePasswordForm(FlaskForm):
 
 
 class NotificationSettingForm(FlaskForm):
-    receive_comment_notification = BooleanField("New comment")
-    receive_collect_notification = BooleanField("New collect")
-    receive_follow_notification = BooleanField("New follower")
+    receive_comment_notifications = BooleanField("New comment")
+    receive_collect_notifications = BooleanField("New collect")
+    receive_follow_notifications = BooleanField("New follower")
     submit = SubmitField()
 
 
