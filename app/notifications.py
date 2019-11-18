@@ -14,7 +14,7 @@ def push_follow_notification(follower, receiver):
 
 def push_comment_notification(photo_id, receiver, page=1):
     message = '<a href="%s#comments">This photo</a> has new comment/reply.' % \
-              (url_for('.show_photo', photo_id=photo_id, page=page))
+              (url_for('main.show_photo', photo_id=photo_id, page=page))
     notification = Notification(message=message, receiver=receiver)
     db.session.add(notification)
     db.session.commit()

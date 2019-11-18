@@ -37,13 +37,13 @@ def follow(username):
         return jsonify(message='Already followed'), 400
 
     current_user.follow(user)
-    if user.receive_collect_notification:
+    if user.receive_collect_notifications:
         push_follow_notification(follower=current_user, receiver=user)
     return jsonify(message="User followed")
 
 
 @ajax_bp.route('/unfollow/<username>', methods=['POST'])
-# todo ?? login required
+# todo ?? login required decorator works here too or not
 def unfollow(username):
     if not current_user.is_authenticated:
         return jsonify(message='Login required'), 403
@@ -56,7 +56,7 @@ def unfollow(username):
     return jsonify(message="User unfollowed")
 
 
-@ajax_bp.route('/notificatons-count/')
+@ajax_bp.route('/notifications-count/')
 def notifications_count():
     if not current_user.is_authenticated:
         return jsonify(message="Login required"), 403
@@ -64,11 +64,12 @@ def notifications_count():
     return jsonify(count=count), 200  # todo ?? status is 200
 
 
-@ajax_bp.route('/<int:photo_id>/followers-count')
-def collectors_count(photo_id):
-    photo = Photo.query.get_or_404(photo_id)
-    count = len(photo.collectors)
-    return jsonify(count=count)
+@ajax_bp.route('/collect_notification/<int:photo_id>/', methods=["POST"])
+def collect_notification(photo_id):
+    receiver = Photo.query.get_or_404(photo_id).author
+    push_collect_notification(collector=current_user, photo_id=photo_id, receiver=receiver)
+    notification = receiver.notifications[0]
+    return jsonify(message=notification.message, receiver=notification.receiver.name)
 
 
 @ajax_bp.route('/collect/<int:photo_id>', methods=['POST'])
@@ -85,9 +86,18 @@ def collect(photo_id):
         return jsonify(message="Already collected"), 400
 
     current_user.collect(photo)
+    not_author = current_user != photo.author
+    allow_notification = photo.author.receive_collect_notifications
     if current_user != photo.author and photo.author.receive_collect_notifications:
         push_collect_notification(current_user, photo_id, photo.author)
-    return jsonify(message="Photo collected")
+    return jsonify(message="Photo collected", not_author=not_author, allow_notification=allow_notification)
+
+
+@ajax_bp.route('/<int:photo_id>/followers-count')
+def collectors_count(photo_id):
+    photo = Photo.query.get_or_404(photo_id)
+    count = len(photo.collectors)
+    return jsonify(count=count)
 
 
 @ajax_bp.route("/uncollect/<int:photo_id>", methods=["POST"])
