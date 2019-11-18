@@ -120,9 +120,11 @@ uploads/avatars/*
 whooshee/
 updloads/
 
-PIpfile
+Pipfile
 Pipfile.lock
 .DS_Store
 
 uploads/
 whooshee/
+
+requirements-dev.txt
