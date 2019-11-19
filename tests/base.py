@@ -21,7 +21,7 @@ class BaseTestCase(unittest.TestCase):
 
         admin_user = User(email="admin@test.com", name="Admin User", username='admin', confirmed=True)
         admin_user.set_password('123456')
-        admin_user.set_role(2)
+        admin_user.set_role('Administrator')
         common_user = User(email="common@test.com", name="Common User", username='common', confirmed=True)
         common_user.set_password('123456')
         unconfirmed_user = User(email="unconfirmed@test.com", name="Unconfirmed", username='unconfirmed', confirmed=False)

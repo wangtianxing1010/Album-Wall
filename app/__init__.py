@@ -1,6 +1,8 @@
 import os
 
 import click
+from flask.cli import FlaskGroup
+
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFError
 from flask_login import current_user
@@ -20,6 +22,7 @@ from app.models import User, Permission, Role, Photo, Tag, Comment, Follow, Coll
 import logging
 from logging.handlers import RotatingFileHandler
 
+
 def create_app(config_name=None):
     if config_name is None:
         config_name = os.getenv('FLASK_CONFIG', 'development')
@@ -27,6 +30,7 @@ def create_app(config_name=None):
     app = Flask('app')
 
     app.config.from_object(config[config_name])
+    click.echo("config: %s" % config_name)
 
     register_extensions(app)
     register_blueprints(app)
@@ -37,6 +41,8 @@ def create_app(config_name=None):
 
     app.redis = Redis.from_url(app.config["REDIS_URL"])
     app.task_queue = rq.Queue("flask-album-tasks", connection=app.redis)
+    # todo add to Procfile
+    # worker: rq worker -u $REDIS_URL flask-album-tasks
 
     if not app.debug and not app.testing:
         # Log to stdout config for heroku
@@ -122,8 +128,18 @@ def register_errorhandlers(app):
 
     @app.errorhandler(CSRFError)
     def handle_csrf_error(e):
-        return render_template("errors/400.html", description=e.description), 500 # 500??
+        return render_template("errors/400.html", description=e.description), 500  # 500??
 
+
+# @click.group(cls=FlaskGroup, create_app=create_app)
+# def cli():
+#     pass
+
+# commands registeration for application factory
+
+# https://dormousehole.readthedocs.io/en/latest/cli.html#id9
+# https://packaging.python.org/tutorials/packaging-projects/#console-scripts
+# https://isudox.com/2016/08/29/running-flask-with-gunicorn-in-application-factory/
 
 def register_commands(app):
     @app.cli.command()
@@ -141,7 +157,7 @@ def register_commands(app):
     def init():
         """Initialize Album Wall application"""
         click.echo("Initializing the database..")
-        db.create_all() # why create again????
+        db.create_all()  # why create again????
 
         click.echo("Initializing the permissions and roles...")
         Role.init_role()
@@ -159,13 +175,19 @@ def register_commands(app):
         """generating fake data"""
         from app.fakes import fake_admin, fake_user, fake_photo, fake_tag, fake_comment, fake_collect,\
             fake_follow
-
-        db.drop_all() # Why drop and create again???
+        click.echo("database: %s" % db.__repr__())
+        db.drop_all()  # Why drop and create again???
         # so that when you execute the command multiple times, there is only one copy of data
+        click.echo("Initializing the database..")
         db.create_all()
 
-        click.echo("Initializing the roles and permissions...")
+        click.echo("Initializing the permissions and roles...")
         Role.init_role()
+
+        click.echo('Done')
+
+        click.echo("database: %s" % db.__repr__())
+
         click.echo("Generating fake administrator")
         fake_admin()
         click.echo("Generating %s fake users" % user)

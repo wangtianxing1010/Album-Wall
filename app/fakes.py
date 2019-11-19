@@ -21,7 +21,7 @@ def fake_admin():
         website=fake.url(),
         confirmed=True
     )
-    admin.set_password('derigel')
+    admin.set_password('123456789')
     notification = Notification(message='Hello, welcome to Album Wall.', receiver=admin)
     db.session.add(notification)
     db.session.add(admin)
@@ -29,7 +29,25 @@ def fake_admin():
 
 
 def fake_user(count=10):
-    for c in range(count):
+    moderator = User(email="moderator@test.com", name="Moderator User", username='admin', confirmed=True)
+    moderator.set_password('123456789')
+    moderator.set_role("Moderator")
+
+    common_user = User(email="common@test.com", name="Common User", username='common', confirmed=True)
+    common_user.set_password('123456789')
+
+    unconfirmed_user = User(email="unconfirmed@test.com", name="Unconfirmed", username='unconfirmed', confirmed=False)
+    unconfirmed_user.set_password('123456789')
+    locked_user = User(email="locked@test.com", name="Locked User", username='locked', confirmed=True,
+                       locked=True)
+    locked_user.set_password('123456789')
+    locked_user.lock()
+
+    blocked_user = User(email="blocked@test.com", name="Blocked User", username='blocked', confirmed=True,
+                        active=False)
+    blocked_user.set_password('123456789')
+
+    for c in range(count-5):
         user = User(
             name=fake.name(),
             username=fake.user_name(),

@@ -58,6 +58,7 @@ class BaseConfig:
     REDIS_URL = os.environ.get("REDIS_URL") or 'redis://'
 
     WHOOSHEE_MIN_STRING_LEN = 1
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT', 1)
 
 
 class DevelopmentConfig(BaseConfig):
@@ -73,7 +74,7 @@ class TestingConfig(BaseConfig):
 
 
 class ProductionConfig(BaseConfig):
-    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", prefix + os.path.join(basedir, 'data.db'))
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", prefix + os.path.join(basedir, 'albumwall.db'))
 
 
 class Operations:
@@ -83,7 +84,7 @@ class Operations:
 
 
 class HerokuConfig(ProductionConfig):
-    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", prefix + os.path.join(basedir, 'heroku.db'))
 
 
 

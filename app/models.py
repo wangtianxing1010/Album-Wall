@@ -118,9 +118,9 @@ class User(db.Model, UserMixin):
         self.follow(self)
         self.set_role()
 
-    def set_role(self, role_id=None):
-        if role_id:
-            role = Role.query.get(role_id)
+    def set_role(self, role_name=None):
+        if role_name:
+            role = Role.query.filter_by(name=role_name).first()
             self.role = role if role else None
         if self.role is None:
             if self.email == current_app.config['ALBUM_WALL_ADMIN_EMAIL']:
@@ -280,7 +280,7 @@ class Notification(db.Model):
 def delete_avatar(**kwargs):
     target = kwargs['target']
     for filename in [target.avatar_s, target.avatar_m, target.avatar_l, target.avatar_raw]:
-        if filename is not None: # avatar_raw may be none
+        if filename is not None:  # avatar_raw may be none
             path = os.path.join(current_app.config['AVATARS_SAVE_PATH'], filename)
             if os.path.exists(path):
                 os.remove(path)
