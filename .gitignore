@@ -111,13 +111,12 @@ venv.bak/
 *.db
 .idea
 .idea/*
+
 uploads/*
 !uploads/.gitkeep
 !uploads/avatars
 uploads/avatars/*
 !uploads/avatars/.gitkeep
-
-whooshee/
 
 Pipfile
 Pipfile.lock
