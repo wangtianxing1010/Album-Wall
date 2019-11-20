@@ -74,7 +74,7 @@ class Collect(db.Model):
 @whooshee.register_model('name', 'username')
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(10), unique=True, index=True)
+    username = db.Column(db.String(20), unique=True, index=True)
     email = db.Column(db.String(250), unique=True, index=True)
     password_hash = db.Column(db.String(250))
     name = db.Column(db.String(20))
