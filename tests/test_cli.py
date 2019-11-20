@@ -27,7 +27,7 @@ class CLITestCase(BaseTestCase):
         self.assertEqual(4, Role.query.count())
 
     def test_forge_command(self):
-        # to be added
+        # todo be added
         pass
 
     def test_forge_command_with_count(self):

@@ -118,7 +118,6 @@ uploads/avatars/*
 !uploads/avatars/.gitkeep
 
 whooshee/
-updloads/
 
 Pipfile
 Pipfile.lock

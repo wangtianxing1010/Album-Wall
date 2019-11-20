@@ -27,3 +27,4 @@ def push_collect_notification(collector, photo_id, receiver):
     notification = Notification(message=message, receiver=receiver)
     db.session.add(notification)
     db.session.commit()
+    return notification

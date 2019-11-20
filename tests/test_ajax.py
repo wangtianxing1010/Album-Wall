@@ -1,7 +1,7 @@
 from flask import url_for
 
 from tests.base import BaseTestCase
-from app.models import User, Photo
+from app.models import User, Photo, Notification
 
 
 class AjaxTestCase(BaseTestCase):
@@ -87,22 +87,15 @@ class AjaxTestCase(BaseTestCase):
         self.assertEqual("Login required", data['message'])
 
         # admin user collect common user's photo
-        admin = User.query.get(1)
-        admin.collect(Photo.query.get(2))
+        self.login('admin@test.com', '123456')
+        self.client.post(url_for('ajax.collect', photo_id=2))
+        self.logout()
         # common user should receive notification
         self.login()
-        common = User.query.get(2)
         res = self.client.get(url_for('ajax.notifications_count'))
         data = res.get_json()
-        noti = common.notifications
         self.assertEqual(res.status_code, 200)
         self.assertEqual(1, data['count'])
-
-    def test_collect_notification(self):
-        self.login('admin@test.com', '123456')
-        res = self.client.post(url_for('ajax.collect_notification', photo_id=2))
-        data = res.get_json()
-        self.logout()
 
     def test_collectors_count(self):
         # no collectors
