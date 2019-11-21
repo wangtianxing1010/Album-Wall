@@ -23,12 +23,7 @@ def fake_admin():
     )
     admin.set_password('123456789')
     notification = Notification(message='Hello, welcome to Album Wall.', receiver=admin)
-    db.session.add(notification)
-    db.session.add(admin)
-    db.session.commit()
-
-
-def fake_user(count=10):
+    # roles representatives
     moderator = User(email="moderator@test.com", name="Moderator User", username='admin', confirmed=True)
     moderator.set_password('123456789')
     moderator.set_role("Moderator")
@@ -47,7 +42,12 @@ def fake_user(count=10):
                         active=False)
     blocked_user.set_password('123456789')
 
-    for c in range(count-5):
+    db.session.add_all([admin, notification, common_user, moderator, unconfirmed_user, locked_user, blocked_user])
+    db.session.commit()
+
+
+def fake_user(count=10):
+    for c in range(count):
         user = User(
             name=fake.name(),
             username=fake.user_name(),
@@ -97,7 +97,10 @@ def fake_photo(count=30):
 def fake_follow(count=30):
     for i in range(count):
         user = User.query.get(random.randint(1, User.query.count()))
-        user.follow(User.query.get(random.randint(1, User.query.count())))
+        followed_user = User.query.get(random.randint(1, User.query.count()))
+        while followed_user == user or user.is_following(followed_user):
+            followed_user = User.query.get(random.randint(1, User.query.count()))
+        user.follow(followed_user)
         db.session.commit()
 
 
@@ -107,14 +110,18 @@ def fake_tag(count=20):
         db.session.add(tag)
         try:
             db.session.commit()
-        except IntegrityError:
+        except IntegrityError as e:
+            print e.message
             db.session.rollback()
 
 
 def fake_collect(count=50):
     for i in range(count):
         user = User.query.get(random.randint(1, User.query.count()))
-        user.collect(Photo.query.get(random.randint(1, User.query.count())))
+        collected_photo = Photo.query.get(random.randint(1, Photo.query.count()))
+        while user.is_collecting(collected_photo):
+            collected_photo = Photo.query.get(random.randint(1, Photo.query.count()))
+        user.collect(collected_photo)
     db.session.commit()
 
 

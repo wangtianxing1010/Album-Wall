@@ -1,7 +1,8 @@
 import os
 
 import click
-from flask.cli import FlaskGroup
+
+# todo from flask.cli import FlaskGroup
 
 from flask import Flask, render_template
 from flask_wtf.csrf import CSRFError
@@ -131,6 +132,7 @@ def register_errorhandlers(app):
         return render_template("errors/400.html", description=e.description), 500  # 500??
 
 
+# todo
 # @click.group(cls=FlaskGroup, create_app=create_app)
 # def cli():
 #     pass
@@ -168,7 +170,7 @@ def register_commands(app):
     @click.option('--user', default=10, help='Quantity of users, default is 10')
     @click.option('--photo', default=30, help="Quantity of photos, default is 30")
     @click.option('--tag', default=20, help="Quantity of photos, default is 20")
-    @click.option('--comment', default=100, help='Quantity of photos, default is 200')
+    @click.option('--comment', default=100, help='Quantity of photos, default is 100')
     @click.option('--collection', default=50, help="Quantity of collections, default is 50")
     @click.option("--follow", default=30, help="Quantity of follows, default is 30")
     def forge(user, photo, tag, comment, collection, follow):
