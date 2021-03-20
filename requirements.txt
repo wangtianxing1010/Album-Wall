@@ -14,7 +14,7 @@ flask-whooshee==0.6.0
 Flask-WTF==0.14.2
 ipaddress==1.0.22
 itsdangerous==0.24
-Jinja2==2.10
+Jinja2==2.11.3
 MarkupSafe==1.0
 pathtools==0.1.2
 Pillow==5.2.0
